@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\PostController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/create',[PostController::class, 'index']);
 Route::post('/create',[PostController::class, 'create']);
 Route::get('/delete/{id}',[PostController::class, 'delete']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard',[DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
